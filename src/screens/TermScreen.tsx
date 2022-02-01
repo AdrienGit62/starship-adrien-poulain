@@ -1,12 +1,11 @@
 import React from "react";
 import { View, Text, Image, ScrollView } from "react-native";
-import { Appbar, Title } from "react-native-paper";
+import { Appbar, Button, Title } from "react-native-paper";
+import { AppRoutes } from "../navigation/AppRoutes";
 
-const TermsScreen = () => {
+const TermsScreen = (props: any) => {
   function goBack() {
-    // We need to use the screen props `{navigation}` to navigate back
-    // it will be introduced in the next lesson `react-navigation`
-    alert("goBack pressed!");
+    props.navigation.navigate(AppRoutes.LOGIN_SCREEN);
   }
 
   return (
@@ -102,6 +101,15 @@ const TermsScreen = () => {
         />
 
         <Text style={{ marginBottom: 128 }}>May the force be with you</Text>
+
+        <Button
+          mode="contained"
+          onPress={() =>
+            props.navigation.navigate(AppRoutes.STARSHIP_FEED_SCREEN)
+          }
+        >
+          Accept !
+        </Button>
       </View>
     </ScrollView>
   );

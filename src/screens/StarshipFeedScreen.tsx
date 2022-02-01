@@ -11,8 +11,9 @@ import { Button, Card } from "react-native-paper";
 import Offline from "../components/Offline";
 import { useStarships } from "../hooks/useStarships";
 import { alldata } from "../../api/data";
+import { StarshipCard } from "../components/StarshipCard";
 
-const Item = ({ title }) => (
+const Item = (title: any) => (
   <View style={styles.item}>
     <Text style={styles.title}>{title}</Text>
   </View>
@@ -27,21 +28,15 @@ const StarshipFeedScreen = () => {
   if (isError) {
     return <Offline />;
   }
-  const renderItem = ({ item }) => (
-    <Card>
-      <View style={styles.card}>
-        <Card.Content style={styles.item}>
-          <Text style={styles.title}>{item.name}</Text>
-          <View style={styles.description}>
-            <Text>{item.manufacturer}</Text>
-            <Text>{item.cost_in_credits}</Text>
-          </View>
-          <Button mode="contained" onPress={() => console.log("Pressed")}>
-            Acheter ce vaisseau
-          </Button>
-        </Card.Content>
-      </View>
-    </Card>
+  const renderItem = (starship: any) => (
+    (
+      <StarshipCard
+        name={starship.item.name}
+        model={starship.item.model}
+        manufacturer={starship.item.manufacturer}
+        cost_in_credits={starship.item.cost_in_credits}
+      />
+    )
   );
   return (
     <SafeAreaView style={styles.container}>
@@ -61,10 +56,6 @@ const styles = StyleSheet.create({
     paddingBottom: 88,
     marginTop: StatusBar.currentHeight || 0,
   },
-  card: {
-    backgroundColor: "#FFFFFF",
-    padding: 10,
-  },
   item: {
     shadowColor: "#000",
     shadowOffset: {
@@ -82,9 +73,6 @@ const styles = StyleSheet.create({
     fontSize: 24,
     textTransform: "uppercase",
     fontWeight: "700",
-    paddingBottom: 20,
-  },
-  description: {
     paddingBottom: 20,
   },
 });
