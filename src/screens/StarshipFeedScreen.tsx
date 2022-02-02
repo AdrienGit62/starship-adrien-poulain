@@ -7,11 +7,12 @@ import {
   View,
   FlatList,
 } from "react-native";
-import { Button, Card } from "react-native-paper";
+import { Button, Card, Title } from "react-native-paper";
 import Offline from "../components/Offline";
 import { useStarships } from "../hooks/useStarships";
 import { alldata } from "../../api/data";
 import { StarshipCard } from "../components/StarshipCard";
+import { AppRoutes } from "../navigation/AppRoutes";
 
 const Item = (title: any) => (
   <View style={styles.item}>
@@ -19,7 +20,7 @@ const Item = (title: any) => (
   </View>
 );
 
-const StarshipFeedScreen = () => {
+const StarshipFeedScreen = (props: any) => {
   const { isLoading, isError, data } = useStarships();
 
   if (isLoading) {
@@ -29,17 +30,22 @@ const StarshipFeedScreen = () => {
     return <Offline />;
   }
   const renderItem = (starship: any) => (
-    (
-      <StarshipCard
-        name={starship.item.name}
-        model={starship.item.model}
-        manufacturer={starship.item.manufacturer}
-        cost_in_credits={starship.item.cost_in_credits}
-      />
-    )
+    <StarshipCard
+      name={starship.item.name}
+      model={starship.item.model}
+      manufacturer={starship.item.manufacturer}
+      cost_in_credits={starship.item.cost_in_credits}
+    />
   );
   return (
     <SafeAreaView style={styles.container}>
+      <Button
+        mode="contained"
+        onPress={() => props.navigation.navigate(AppRoutes.LOGIN_SCREEN)}
+      >
+        Se Déconnecter
+      </Button>
+      <Title>Starships</Title>
       <FlatList
         data={alldata.results}
         renderItem={renderItem}

@@ -6,7 +6,6 @@ import { Button, TextInput, Headline } from "react-native-paper";
 import { AppRoutes } from "../navigation/AppRoutes";
 
 export function LoginScreen(props: any) {
-  console.log(props);
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [visible, setVisible] = React.useState(false);
