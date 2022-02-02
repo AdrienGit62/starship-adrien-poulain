@@ -30,12 +30,7 @@ const StarshipFeedScreen = (props: any) => {
     return <Offline />;
   }
   const renderItem = (starship: any) => (
-    <StarshipCard
-      name={starship.item.name}
-      model={starship.item.model}
-      manufacturer={starship.item.manufacturer}
-      cost_in_credits={starship.item.cost_in_credits}
-    />
+    <StarshipCard items={starship.item} props={props} />
   );
   return (
     <SafeAreaView style={styles.container}>

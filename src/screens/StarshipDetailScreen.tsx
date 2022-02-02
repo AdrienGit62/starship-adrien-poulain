@@ -1,40 +1,37 @@
-import React from "react";
-import {
-  StyleSheet,
-  Text,
-  StatusBar,
-  View,
-} from "react-native";
-import {Button, Card } from "react-native-paper";
+import * as React from "react";
+import { StyleSheet, Text, StatusBar, View } from "react-native";
+import { Button, Card } from "react-native-paper";
 import { AppRoutes } from "../navigation/AppRoutes";
 
-interface StarshipCardProps {
-  items : any,
-  props: any,
+interface StarshipDetailItems {
+  items: any;
 }
 
-export function StarshipCard({
-  items,
-  props,
-}: StarshipCardProps) {
+export function StarShipsDetailScreen(items: any) {
+  const {
+    cost_in_credits,
+    length,
+    manufacturer,
+    model,
+    name,
+    passengers,
+    starship_class,
+    cargo_capacity
+  } = items.route.params.items
   return (
     <Card>
       <View style={styles.card}>
         <Card.Content style={styles.item}>
-          <Text style={styles.title}>{items.name}</Text>
+          <Text style={styles.title}>{name}</Text>
           <View style={styles.description}>
-            <Text>{items.model}</Text>
-            <Text>{items.manufacturer}</Text>
-            <Text>{items.cost_in_credits}</Text>
+            <Text>{model}</Text>
+            <Text>{manufacturer}</Text>
+            <Text>{length}</Text>
+            <Text>{passengers}</Text>
+            <Text>{starship_class}</Text>
+            <Text>{cargo_capacity}</Text>
+            <Text>{cost_in_credits}</Text>
           </View>
-          <Button
-            mode="contained"
-            onPress={() =>
-              props.navigation.navigate(AppRoutes.STARSHIP_DETAIL_SCREEN, {items})
-            }
-          >
-            Acheter ce vaisseau
-          </Button>
         </Card.Content>
       </View>
     </Card>
